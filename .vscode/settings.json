@@ -1,0 +1,57 @@
+{
+    "todo-tree.general.statusBar": "total",
+    "todo-tree.filtering.ignoreGitSubmodules": true,
+    "todo-tree.tree.scanMode": "workspace",
+    "todo-tree.general.periodicRefreshInterval": 1,
+    "todo-tree.general.tags": [
+        "REQUIRED",
+        "OPTIONAL",
+        "{ }",
+        "{+}",
+        "{x}",
+    ],
+    "todo-tree.general.tagGroups": {
+        "TODO": [
+            "TODO",
+            "{ }",
+        ],
+        "FINISHED": [
+            "FINISHED",
+            "{+}",
+            "{x}",
+        ]
+    },
+    "todo-tree.tree.groupedByTag": true,
+    "todo-tree.tree.groupedBySubTag": true,
+    "todo-tree.tree.sortTagsOnlyViewAlphabetically": true,
+    "todo-tree.tree.expanded": true,
+    "todo-tree.tree.tagsOnly": true,
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.regex.regex": "(//|#|\\*|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)\\s*($TAGS)*",
+    "todo-tree.regex.subTagRegex": "(REQUIRED|OPTIONAL)",
+    "todo-tree.tree.labelFormat": "${after}",
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "tag-and-subTag",
+        "opacity": 0,
+        "foreground": "#c7c7c7",
+        "icon": "checklist"
+    },
+    "todo-tree.highlights.customHighlight": {
+        "REQUIRED": {
+            "icon": "flame",
+            "foreground": "#f13506",
+        },
+        "OPTIONAL": {
+            "icon": "question",
+            "foreground": "#e9bc0a",
+        },
+        "FINISHED": {
+            "icon": "check",
+            "foreground": "#059705",
+        },
+        "TODO": {
+            "icon": "alert",
+            "foreground": "#bb7b03",
+        },
+    },
+}

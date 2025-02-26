@@ -1,0 +1,3 @@
+[submodule "cmocka"]
+	path = cmocka
+	url = https://gitlab.90cos.cdl.af.mil/90cos/ccv/eval-systems/external-submodules/cmocka.git
