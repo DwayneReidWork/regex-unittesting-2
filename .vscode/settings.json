@@ -54,4 +54,5 @@
             "foreground": "#bb7b03",
         },
     },
+    "cmake.options.statusBarVisibility": "compact",
 }
