@@ -28,6 +28,8 @@ Depending on your environment, there are a couple ways you can build the challen
 
 Ensure you have `cmake` installed via `apt`. Compiling this project via `gcc`/`clang` is not covered.
 
+Regardless of how the project is built, the result is two binaries, one contianing your main application, and the other that invokes unit tests to test your functionality. These will be created in `./build/bin` and are named `c_challenge` and `c_challenge_tests`, where `c_challenge` is whatever the challenge is named.
+
 ### VSCode + CMake + CMake Extension
 This is the ideal method as it makes it very easy to run and debug the applications as the environment is currently set up.
 
