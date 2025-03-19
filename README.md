@@ -35,7 +35,7 @@ This is the ideal method as it makes it very easy to run and debug the applicati
 
 Ensure you have installed the VSCode extensions `CMake` and `CMake Tools`. 
 
-At this point, there should be a good amount of buttons in the bottom status bar. The most important ones are the bug and play icons followed by the name of the challenge in brackets (i.e. `[c_challenge]). The bug icon will debug your application, play button runs it, and the text in brackets will change whether you are debugging/running the challenge itself or the unit tests for the challenge (these are called "targets"). Clicking on the text will alllow you to select which target you are running/debugging.
+At this point, there should be a good amount of buttons in the bottom status bar. The most important ones are the bug and play icons followed by the name of the challenge in brackets (i.e. `[c_challenge]`). The bug icon will debug your application, play button runs it, and the text in brackets will change whether you are debugging/running the challenge itself or the unit tests for the challenge (these are called "targets"). Clicking on the text will alllow you to select which target you are running/debugging.
 
 *Note*: The "play" or "debug" icons in the top right of any C source files will run the currently active target; even if you have a C unit test source file open, and the active target is "c_challenge" (or equivalant challenge name, as long as it's without "_tests"), it won't run the tests, and vice versa if you have a "_tests" target set.
 
