@@ -55,4 +55,18 @@
         },
     },
     "cmake.options.statusBarVisibility": "compact",
+    "files.associations": {
+        "*.py": "python",
+        "string.h": "c",
+        "stat.h": "c",
+        "stdlib.h": "c",
+        "regex.h": "c",
+        "stdio.h": "c"
+    },
+    "cmake.debugConfig": {
+        "args": [
+            "[0-9]+"
+        ],
+        "cwd": "${workspaceFolder}",
+    }
 }

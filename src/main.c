@@ -1,16 +1,14 @@
-#include "example.h"
+#define _XOPEN_SOURCE 500
+#include "regex_and_testing.c"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
-// { } REQUIRED Edit main to run your challenge
-int main(void)
+int main(int argc, char *argv[])
 {
-    int x = 42;
+    if (check_args(argc, argv) != 0)
+        return EXIT_FAILURE;
 
-    x = example(x);
-
-    printf("Result: %d\n", x);
-
-    return 0;
+    return EXIT_SUCCESS;
 }

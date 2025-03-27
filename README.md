@@ -68,3 +68,16 @@ cmake --build build
 (If you just change source code in existing files, you only need the second command to recompile.)
 
 That's it! Now the binaries exist and can be executed on the command line however you please.
+
+
+
+
+input of regex 
+search thru files for matching 
+
+MAN STAT
+stat files for size, last access time, permissions (int),
+
+wtire code as testable blocks
+
+write unittests
