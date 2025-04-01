@@ -59,21 +59,18 @@ static void test_compile_regex_invalid_regex(void **state)
 static void test_search_through_tree(void **state)
 {
     result = search_through_tree(".", mock_ftw_callback);
-    printf("search tree result: %d\n", result);
     assert_int_equal(result, 0);
 }
 
 static void test_search_through_tree_invalid_dirpath(void **state)
 {
     result = search_through_tree(".fail", mock_ftw_callback);
-    printf("search tree fail result: %d\n", result);
     assert_int_equal(result, -1);
 }
 
 static void test_search_through_tree_invalid_callback_func(void **state)
 {
     result = search_through_tree(".", NULL);
-    printf("search tree fail result: %d\n", result);
     assert_int_equal(result, -1);
 }
 

@@ -24,6 +24,22 @@ int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct 
     const struct stat *sb: A pointer to a stat structure containing information about the file.
     int typeflag: Indicates whether the current file is a directory (FTW_D), regular file (FTW_F), or another type.
     struct FTW *ftwbuf: Contains information about the current file, including the depth of the directory tree.*/
+    if (!fpath || fpath < 0)
+    {
+        printf("Error with file path pointer.");
+        return -1;
+    }
+    else if (!sb || sb < 0)
+    {
+        printf("Error with struct pointer.");
+        return -1;
+    }
+    else if (!ftwbuf || ftwbuf < 0)
+    {
+        printf("Error with file information pointer.");
+        return -1;
+    }
+
     if (typeflag == FTW_F)
     { // Only process files
         if (regexec(&regex, fpath, 0, NULL, 0) == 0)
@@ -38,6 +54,21 @@ int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct 
 
 int display_info(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf)
 {
+    if (!fpath || fpath < 0)
+    {
+        printf("Error with file path pointer.");
+        return -1;
+    }
+    else if (!sb || sb < 0)
+    {
+        printf("Error with struct pointer.");
+        return -1;
+    }
+    else if (!ftwbuf || ftwbuf < 0)
+    {
+        printf("Error with file information pointer.");
+        return -1;
+    }
     /* %-3 This specifies that the output will be a string (s), left-aligned (-), with a width of 3 characters. The string will be padded with spaces if it is shorter than 3 characters.*/
 
     /*%2d This is for an integer (d) to be printed with a width of 2 characters. If the integer is less than 2 digits, it will be padded with spaces. */
@@ -63,7 +94,7 @@ int display_info(const char *fpath, const struct stat *sb, int tflag, struct FTW
            ftwbuf->level);
 
     if (tflag == FTW_NS)
-        // If file cant be statted ptint dashes in file size
+        // If file cant be statted print dashes in file size
         printf("-------");
 
     else
@@ -102,11 +133,9 @@ int compile_regex(int argc, char *argv[])
 
 int search_through_tree(char dirpath[], ftw_callback_t callback_ptr)
 {
-    // dirpath = where traversing starts
-
     if (!callback_ptr)
     {
-        fprintf(stderr, "Error: NULL callback function provided to search_through_tree\n");
+        fprintf(stderr, "Error: NULL callback function provided.\n");
         return -1;
     }
 
