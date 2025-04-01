@@ -61,11 +61,13 @@
         "stat.h": "c",
         "stdlib.h": "c",
         "regex.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cmocka.h": "c"
     },
     "cmake.debugConfig": {
         "args": [
-            "[0-9]+"
+            //this is where you can pre load args.
+            "common.h"
         ],
         "cwd": "${workspaceFolder}",
     }

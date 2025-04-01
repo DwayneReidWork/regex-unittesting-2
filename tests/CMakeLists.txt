@@ -27,6 +27,6 @@ target_link_libraries(
     cmocka
 )
 
-target_sources(${PROJECT_NAME}_tests PRIVATE ../src/example.c)
+target_sources(${PROJECT_NAME}_tests PRIVATE ../src/regex_and_testing.c)
 
 add_subdirectory(src)

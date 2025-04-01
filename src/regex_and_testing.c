@@ -15,12 +15,15 @@ This program can be run from the command line passing in a string and will searc
 
 regex_t regex;
 
-/*const char *fpath: The path of the current file or directory.
-const struct stat *sb: A pointer to a stat structure containing information about the file.
-int typeflag: Indicates whether the current file is a directory (FTW_D), regular file (FTW_F), or another type.
-struct FTW *ftwbuf: Contains information about the current file, including the depth of the directory tree.*/
+// dirpath = where traversing starts
+char dirpath[] = ".";
+
 int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf)
 {
+    /*const char *fpath: The path of the current file or directory.
+    const struct stat *sb: A pointer to a stat structure containing information about the file.
+    int typeflag: Indicates whether the current file is a directory (FTW_D), regular file (FTW_F), or another type.
+    struct FTW *ftwbuf: Contains information about the current file, including the depth of the directory tree.*/
     if (typeflag == FTW_F)
     { // Only process files
         if (regexec(&regex, fpath, 0, NULL, 0) == 0)
@@ -32,6 +35,9 @@ int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct 
     }
     return 0;
 }
+
+// declare and assign it
+ftw_callback_t callback_ptr = ftw_callback;
 
 int display_info(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf)
 {
@@ -80,29 +86,46 @@ int check_args(int argc, char *argv[])
         printf("Usage: %s <regex>\n", argv[0]);
         return -1;
     }
+    return 0;
+}
 
+int compile_regex(int argc, char *argv[])
+{
     int status = regcomp(&regex, argv[1], REG_EXTENDED);
-    char dirpath[] = ".";
 
     if (status != 0)
     {
         char errbuf[256];
         regerror(status, &regex, errbuf, sizeof(errbuf));
         fprintf(stderr, "regcomp error: %s\n", errbuf);
-        exit(EXIT_FAILURE);
+        return -1;
+    }
+    return 0;
+}
+
+int search_through_tree(char dirpath[], ftw_callback_t callback_ptr)
+{
+    if (!callback_ptr)
+    {
+        fprintf(stderr, "Error: NULL callback function provided to search_through_tree\n");
+        return -1;
     }
 
-    // dirpath = where traversing starts
-    // callback called for each file encountered on the traversal
-    // 20 = max distance to traverse down
-    // FTW_phys = treat symbolic links as physical links and skip them
-    if (nftw(dirpath, ftw_callback, 20, FTW_PHYS) == -1)
+    struct stat dir_stat;
+    // checks that the dir path exists and is actually a directory.
+    if (stat(dirpath, &dir_stat) != 0 || !S_ISDIR(dir_stat.st_mode))
+    {
+        fprintf(stderr, "Error: Invalid directory path '%s'\n", dirpath);
+        return -1;
+    }
+
+    // Use the provided callback function
+    if (nftw(dirpath, callback_ptr, 20, FTW_PHYS) == -1)
     {
         perror("nftw");
-        exit(EXIT_FAILURE);
+        return -1;
     }
 
-    // free regex compilers
     regfree(&regex);
     return 0;
 }

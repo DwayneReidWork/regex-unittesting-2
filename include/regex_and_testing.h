@@ -15,7 +15,14 @@
 // use extern to keep it from being redeclared in multiple c files.
 extern regex_t regex;
 
+// define the function prt
+typedef int (*ftw_callback_t)(const char *, const struct stat *, int, struct FTW *);
+
 int check_args(int argc, char *argv[]);
+
+int compile_regex(int argc, char *argv[]);
+
+int search_through_tree(char dirpath[], ftw_callback_t callback_ptr);
 
 int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf);
 

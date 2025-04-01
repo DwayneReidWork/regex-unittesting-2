@@ -7,8 +7,11 @@
 
 int main(int argc, char *argv[])
 {
-    if (check_args(argc, argv) != 0)
+    if (check_args(argc, argv) == -1)
         return EXIT_FAILURE;
 
-    return EXIT_SUCCESS;
+    if (compile_regex(argc, argv) != 0)
+        return EXIT_FAILURE;
+
+    return search_through_tree(dirpath, callback_ptr);
 }
