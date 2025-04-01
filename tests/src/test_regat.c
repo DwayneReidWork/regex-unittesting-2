@@ -26,7 +26,7 @@ static void test_check_args(void **state)
     argc = 2;
     char *testArgV[] = {"program_name", "test_search_term"};
 
-    result = check_args(argc, &testArgV[1]);
+    result = check_args(argc, testArgV);
     assert_int_equal(result, 0);
 }
 
@@ -36,7 +36,7 @@ static void test_check_args_invalid_number_of_args(void **state)
     argc = 3;
     char *testArgV[] = {"program_name", "test_search_term", "search_that_breaks_it"};
 
-    result = check_args(argc, &testArgV[1]);
+    result = check_args(argc, testArgV);
     assert_int_equal(result, -1);
 }
 
@@ -44,7 +44,7 @@ static void test_compile_regex(void **state)
 {
     argc = 2;
     char *testArgV[] = {"program_name", "test_search_term"};
-    result = compile_regex(argc, &testArgV[1]);
+    result = compile_regex(argc, testArgV);
     assert_int_equal(result, 0);
 }
 
@@ -58,24 +58,21 @@ static void test_compile_regex_invalid_regex(void **state)
 
 static void test_search_through_tree(void **state)
 {
-    char dirpath[] = ".";
-    result = search_through_tree(dirpath, mock_ftw_callback);
+    result = search_through_tree(".", mock_ftw_callback);
     printf("search tree result: %d\n", result);
     assert_int_equal(result, 0);
 }
 
 static void test_search_through_tree_invalid_dirpath(void **state)
 {
-    char dirpath[] = ".fail";
-    result = search_through_tree(dirpath, mock_ftw_callback);
+    result = search_through_tree(".fail", mock_ftw_callback);
     printf("search tree fail result: %d\n", result);
     assert_int_equal(result, -1);
 }
 
 static void test_search_through_tree_invalid_callback_func(void **state)
 {
-    char dirpath[] = ".";
-    result = search_through_tree(dirpath, NULL);
+    result = search_through_tree(".", NULL);
     printf("search tree fail result: %d\n", result);
     assert_int_equal(result, -1);
 }

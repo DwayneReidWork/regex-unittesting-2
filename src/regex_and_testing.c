@@ -15,8 +15,8 @@ This program can be run from the command line passing in a string and will searc
 
 regex_t regex;
 
-// dirpath = where traversing starts
-char dirpath[] = ".";
+// declare and assign it
+ftw_callback_t callback_ptr = ftw_callback;
 
 int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf)
 {
@@ -35,9 +35,6 @@ int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct 
     }
     return 0;
 }
-
-// declare and assign it
-ftw_callback_t callback_ptr = ftw_callback;
 
 int display_info(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf)
 {
@@ -81,7 +78,7 @@ int display_info(const char *fpath, const struct stat *sb, int tflag, struct FTW
 
 int check_args(int argc, char *argv[])
 {
-    if (argc != 2)
+    if (2 != argc)
     {
         printf("Usage: %s <regex>\n", argv[0]);
         return -1;
@@ -93,7 +90,7 @@ int compile_regex(int argc, char *argv[])
 {
     int status = regcomp(&regex, argv[1], REG_EXTENDED);
 
-    if (status != 0)
+    if (0 != status)
     {
         char errbuf[256];
         regerror(status, &regex, errbuf, sizeof(errbuf));
@@ -105,6 +102,8 @@ int compile_regex(int argc, char *argv[])
 
 int search_through_tree(char dirpath[], ftw_callback_t callback_ptr)
 {
+    // dirpath = where traversing starts
+
     if (!callback_ptr)
     {
         fprintf(stderr, "Error: NULL callback function provided to search_through_tree\n");
@@ -113,19 +112,17 @@ int search_through_tree(char dirpath[], ftw_callback_t callback_ptr)
 
     struct stat dir_stat;
     // checks that the dir path exists and is actually a directory.
-    if (stat(dirpath, &dir_stat) != 0 || !S_ISDIR(dir_stat.st_mode))
+    if (0 != stat(dirpath, &dir_stat) || !S_ISDIR(dir_stat.st_mode))
     {
         fprintf(stderr, "Error: Invalid directory path '%s'\n", dirpath);
         return -1;
     }
 
     // Use the provided callback function
-    if (nftw(dirpath, callback_ptr, 20, FTW_PHYS) == -1)
+    if (-1 == nftw(dirpath, callback_ptr, 20, FTW_PHYS))
     {
-        perror("nftw");
+        fprintf(stderr, "NFTW Error:'%d'\n", nftw(dirpath, callback_ptr, 20, FTW_PHYS));
         return -1;
     }
-
-    regfree(&regex);
     return 0;
 }

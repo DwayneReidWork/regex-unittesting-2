@@ -11,10 +11,6 @@
 #include <string.h>
 #include <sys/stat.h>
 
-// Global regex variable
-// use extern to keep it from being redeclared in multiple c files.
-extern regex_t regex;
-
 // define the function prt
 typedef int (*ftw_callback_t)(const char *, const struct stat *, int, struct FTW *);
 
