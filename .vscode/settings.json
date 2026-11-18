@@ -62,7 +62,9 @@
         "stdlib.h": "c",
         "regex.h": "c",
         "stdio.h": "c",
-        "cmocka.h": "c"
+        "cmocka.h": "c",
+        "test_regat.h": "c",
+        "regex_and_testing.h": "c"
     },
     "cmake.debugConfig": {
         "args": [

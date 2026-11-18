@@ -11,7 +11,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-// define the function prt
+// define the function ptr
 typedef int (*ftw_callback_t)(const char *, const struct stat *, int, struct FTW *);
 
 int check_args(int argc, char *argv[]);

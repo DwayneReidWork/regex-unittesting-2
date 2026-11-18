@@ -17,7 +17,7 @@ int mock_ftw_callback(const char *fpath, const struct stat *sb, int typeflag, st
     // prints entire directory VVV
     // printf("Mock callback invoked for: %s\n", fpath);
 
-    // CAN JUST HAVE THE FUNCTION RETURN 0 TO FULFIL THE FACE THAT ITS BEING CALLED!!!!!
+    // CAN JUST HAVE THE FUNCTION RETURN 0 TO FULFIL THE FACT THAT ITS BEING CALLED!!!!!
     return 0;
 }
 

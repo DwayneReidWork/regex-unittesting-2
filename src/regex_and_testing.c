@@ -2,7 +2,7 @@
 This program can be run from the command line passing in a string and will search for the string and on a successful match will return the matched working directly as well as file stats.
 */
 
-#define _XOPEN_SOURCE 500
+// #define _XOPEN_SOURCE 500
 #include "regex_and_testing.h"
 
 #include <ftw.h>
@@ -16,6 +16,7 @@ This program can be run from the command line passing in a string and will searc
 regex_t regex;
 
 // declare and assign it
+// function pointer doesnt need the asterisk here because its defined in header.
 ftw_callback_t callback_ptr = ftw_callback;
 
 int ftw_callback(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf)
